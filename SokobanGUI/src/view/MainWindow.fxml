@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+ <?import view.SokobanDisplayer?>
+
+<BorderPane fx:id="mainStage" prefHeight="590.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save" />
+              <MenuItem mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Settings">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Keyboard Settings" onAction="#loadKeyboardSettingsWindow" />
+                  <MenuItem mnemonicParsing="false" text="Turn On/Off Music" onAction="#toggleMusic"/>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+   </center>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+         	<HBox alignment="CENTER" prefHeight="25.0" prefWidth="500">
+               <children>
+                  <Label text="Steps:">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="stepsField" text="0">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Time:">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="timeField" text="0:00" />
+               </children></HBox>
+            <SokobanDisplayer fx:id="fieldData" height="500.0" width="500.0" wallFileName="./resources/RegularWall.png" figureFileName="./resources/RegularFigure.png" boxFileName="./resources/RegularBox.png" targetBoxFileName="./resources/RegularBoxTarget.png" placedBoxFileName="./resources/RegularPlacedBox.png"/>
+         </children>
+         </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="TOP_CENTER" prefHeight="6.0" prefWidth="241.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="320.0">
+               <children>
+                  <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startGame" prefHeight="25.0" prefWidth="99.0" text="Start">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="restartBtn" mnemonicParsing="false" onAction="#resetLevel" prefHeight="25.0" prefWidth="99.0" text="Reset">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="stopBtn" mnemonicParsing="false" onAction="#stopGame" prefHeight="25.0" prefWidth="108.0" text="Stop" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
