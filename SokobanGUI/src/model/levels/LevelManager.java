@@ -25,6 +25,22 @@ public class LevelManager {
 		return false;
 	}
 	
+	public boolean moveAndDrag(SolidEntity se, Direction2D dir)
+	{
+		Position2D oppositePos = new Position2D(se.getPosition());
+		oppositePos.move(dir.getOppositeDirection(), 1);
+		Position2D nextPos = new Position2D(se.getPosition());
+		oppositePos.move(dir, 1);
+		SolidEntity dragEntity = level.getSolidEntity(oppositePos);
+		SolidEntity nextEntity = level.getSolidEntity(nextPos);
+		if(nextEntity!=null)
+		{
+			return recMove(dragEntity, dir, 2);
+		}
+		return false;
+		
+	}
+	
 	//This is a recursion method that check for each solid entity if the next one after able him to move or not
 	private boolean recMove(SolidEntity se,Direction2D dir,int shiftLeft)
 	{

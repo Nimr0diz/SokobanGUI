@@ -11,6 +11,8 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
+import javax.swing.plaf.basic.BasicBorders.MarginBorder;
+
 import commons.CommonLevel;
 import javafx.animation.Animation;
 import javafx.application.Platform;
@@ -40,6 +42,7 @@ import view.settings.KeyboardHashMap;
 import view.settings.KeyboardHashMapLoader;
 import view.settings.KeyboardMap;
 import view.settings.KeyboardMapLoader;
+import view.settings.KeyboardSettingsController;
 
 public class MainWindowController extends Observable implements Initializable, View{
 	@FXML
@@ -136,7 +139,7 @@ public class MainWindowController extends Observable implements Initializable, V
 		});
 		
 			//keyboardMap = new KeyboardMapLoader().load("keyset.xml");
-			loadKeyboardSettings();
+			updateKeyboardSettings(false);
 		
 		fieldData.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->fieldData.requestFocus());
 
@@ -409,6 +412,7 @@ public class MainWindowController extends Observable implements Initializable, V
 	
 	public void loadKeyboardSettingsWindow()
 	{
+		MainWindowController mwc = this;
 			Platform.runLater(new Runnable() {
 				
 				@Override
@@ -416,6 +420,8 @@ public class MainWindowController extends Observable implements Initializable, V
 					try {
 					FXMLLoader fxml = new FXMLLoader();
 					BorderPane root = fxml.load(getClass().getResource("./settings/KeyboardSettings.fxml").openStream());
+					KeyboardSettingsController ksc = (KeyboardSettingsController)fxml.getController();
+					ksc.setParent(mwc);
 					Stage secondStage = new Stage();
 					Scene scene = new Scene(root,360,200);
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -432,10 +438,12 @@ public class MainWindowController extends Observable implements Initializable, V
 			
 	}
 	
-	public static void loadKeyboardSettings()
+	public void updateKeyboardSettings(boolean showMessage)
 	{
 		try {
 			keyboardHashMap = new KeyboardHashMapLoader().load("./resources/keymap.xml");
+			if(showMessage)
+					showAlertMessage(AlertType.INFORMATION, "Keyboard Settings", "Changes saved succesfully");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -449,6 +457,22 @@ public class MainWindowController extends Observable implements Initializable, V
 			mediaPlayer.play();
 		else
 			mediaPlayer.pause();
+	}
+	
+	private void showAlertMessage(AlertType type,String title,String context)
+	{
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				Alert alert;
+				alert = new Alert(type);
+				alert.setTitle(title);
+				alert.setHeaderText(null);
+				alert.setContentText(context);
+				alert.showAndWait();
+			}
+		});
 	}
 	
 }

@@ -6,28 +6,28 @@
     <string>Down</string>
     <object class="java.lang.Enum" method="valueOf">
      <class>javafx.scene.input.KeyCode</class>
-     <string>S</string>
+     <string>G</string>
     </object>
    </void>
    <void method="put">
     <string>Left</string>
     <object class="java.lang.Enum" method="valueOf">
      <class>javafx.scene.input.KeyCode</class>
-     <string>A</string>
+     <string>F</string>
     </object>
    </void>
    <void method="put">
     <string>Right</string>
     <object class="java.lang.Enum" method="valueOf">
      <class>javafx.scene.input.KeyCode</class>
-     <string>D</string>
+     <string>H</string>
     </object>
    </void>
    <void method="put">
     <string>Up</string>
     <object class="java.lang.Enum" method="valueOf">
      <class>javafx.scene.input.KeyCode</class>
-     <string>W</string>
+     <string>T</string>
     </object>
    </void>
   </void>
