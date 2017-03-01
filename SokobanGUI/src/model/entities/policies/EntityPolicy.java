@@ -1,20 +1,20 @@
-package model.policies;
+package model.entities.policies;
 
 import java.io.Serializable;
 
-import model.policies.movements.Movement;
-import model.policies.shifitings.Shifting;
+import model.entities.policies.movements.Movement;
+import model.entities.policies.shifitings.Shifting;
 
 //This abstract class is the super class of all the policies we will want to apply on Entity, how he moves and how much he can shift.
-public abstract class Policy implements Serializable{
+public abstract class EntityPolicy implements Serializable{
 	Movement movement;
 	Shifting shifting;
 	
-	public Policy() {
+	public EntityPolicy() {
 		
 	}
 	
-	public Policy(Movement movement,Shifting shifting)
+	public EntityPolicy(Movement movement,Shifting shifting)
 	{
 		this.movement = movement;
 		this.shifting = shifting;

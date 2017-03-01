@@ -1,4 +1,4 @@
-package model.policies.movements;
+package model.entities.policies.movements;
 
 import commons.Direction2D;
 import model.Position2D;

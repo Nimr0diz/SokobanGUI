@@ -1,7 +1,7 @@
 package model.entities;
 
 import model.Position2D;
-import model.policies.Policy;
+import model.entities.policies.EntityPolicy;
 
 
 //This is the abstract super class of all the boxes in the game.
@@ -12,12 +12,12 @@ public abstract class Box extends SolidEntity {
 		super();
 	}
 	
-	public Box(Policy policy)
+	public Box(EntityPolicy policy)
 	{
 		this.policy = policy;
 	}
 	
-	public Box(Position2D pos,Policy policy) {
+	public Box(Position2D pos,EntityPolicy policy) {
 		super(pos,policy);
 		// TODO Auto-generated constructor stub
 	}

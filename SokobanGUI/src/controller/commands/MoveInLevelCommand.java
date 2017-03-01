@@ -36,8 +36,8 @@ public class MoveInLevelCommand extends Command {
 			if(params.size()>=2)
 			{
 				specialMove= params.get(1);
-				if(specialMove.equals("Drag"))
-					isMoved=model.moveAndDrag(dir);
+			//	if(specialMove.equals("Drag"))
+					//isMoved=model.moveAndDrag(dir);
 			}
 			else
 				isMoved = model.move(dir); //Create new LevelManager who control the Level and moves the first figure.

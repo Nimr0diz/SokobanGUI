@@ -1,4 +1,4 @@
-package model.policies.shifitings;
+package model.entities.policies.shifitings;
 
 import java.io.Serializable;
 //Each shifting power will have its own Shifting class which implements it.

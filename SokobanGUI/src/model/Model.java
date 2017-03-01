@@ -14,5 +14,5 @@ public interface Model {
 	public void restart();
 	public CommonLevel getLevel();
 	public void finishLevel();
-	public boolean moveAndDrag(Direction2D dir);
+	//public boolean moveAndDrag(Direction2D dir);
 }
