@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -50,7 +51,6 @@ public class KeyboardSettingsController implements Initializable {
 	
 	HashMap<Button,TextField> btnToText;
 	HashMap<Button,String> btnToKeyCode;
-	//KeyboardMap keymap;
 	KeyboardHashMap keymap;
 	
 	EventHandler<MouseEvent> clickEvent;
@@ -84,6 +84,24 @@ public class KeyboardSettingsController implements Initializable {
 		btnToText.put(keyDownBtn,keyDownTextBox);
 		btnToText.put(keyLeftBtn,keyLeftTextBox);
 		btnToText.put(keyRightBtn,keyRightTextBox);
+		/*
+		XMLEncoder xml;
+		try {
+			xml = new XMLEncoder(new FileOutputStream("./resources/keymap.xml"));
+			KeyboardHashMap keyboardmap = new KeyboardHashMap();
+			keyboardmap.setKey("Up", KeyCode.UP);
+			keyboardmap.setKey("Down", KeyCode.DOWN);
+			keyboardmap.setKey("Left", KeyCode.LEFT);
+			keyboardmap.setKey("Right", KeyCode.RIGHT);
+			keyboardmap.setKey("Drag", KeyCode.SHIFT);
+			xml.writeObject(keymap);
+			xml.flush();
+			xml.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
 		try {
 			keymap = new KeyboardHashMapLoader().load("./resources/keymap.xml");
 		} catch (FileNotFoundException e1) {

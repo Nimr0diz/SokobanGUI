@@ -30,11 +30,15 @@ public class MoveInLevelCommand extends Command {
 		@Override
 		//The method moves the first figure to the direction he get from the user. 
 		public void execute() {
-			boolean isMoved;
-			String specialMove= params.get(1);
+			boolean isMoved=false;
+			String specialMove;
 			Direction2D dir = directionList.get(params.get(0));
-			if(specialMove.equals("Drag"))
-				isMoved=model.moveAndDrag(dir);
+			if(params.size()>=2)
+			{
+				specialMove= params.get(1);
+				if(specialMove.equals("Drag"))
+					isMoved=model.moveAndDrag(dir);
+			}
 			else
 				isMoved = model.move(dir); //Create new LevelManager who control the Level and moves the first figure.
 			

@@ -44,5 +44,15 @@ public class Timer{
 	{
 		stop=true;
 	}
+	
+	public void close()
+	{
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

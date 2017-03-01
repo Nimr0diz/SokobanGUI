@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Event;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,8 +41,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import view.settings.KeyboardHashMap;
 import view.settings.KeyboardHashMapLoader;
-import view.settings.KeyboardMap;
-import view.settings.KeyboardMapLoader;
 import view.settings.KeyboardSettingsController;
 
 public class MainWindowController extends Observable implements Initializable, View{
@@ -60,8 +59,7 @@ public class MainWindowController extends Observable implements Initializable, V
 	@FXML
 	Label timeField;
 	
-	KeyboardMap keyboardMap;
-	static KeyboardHashMap keyboardHashMap;
+	KeyboardHashMap keyboardHashMap;
 	GameStatus status;
 	
 	int steps;
@@ -72,6 +70,8 @@ public class MainWindowController extends Observable implements Initializable, V
 	
 	MediaPlayer mediaPlayer;
 	boolean enableMusic;
+	
+	KeyCode prevKey = null;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -142,27 +142,50 @@ public class MainWindowController extends Observable implements Initializable, V
 			updateKeyboardSettings(false);
 		
 		fieldData.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->fieldData.requestFocus());
-
 		fieldData.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event)
 			{
 				if(status==GameStatus.PLAYING)
 				{
-					String notifyString = "Move ";
+					String direction = "";
+					String specialAbility = "";
+					String notifyString = "Move";
+					if(prevKey==keyboardHashMap.getKey("Drag"))
+					{
+						specialAbility="Drag";
+						System.out.println("DRAG");
+					}
+					
 					if(event.getCode() == keyboardHashMap.getKey("Down"))
-						notifyString+="Down";
+						direction="Down";
 					else if(event.getCode() == keyboardHashMap.getKey("Up"))
-						notifyString+="Up";
+						direction="Up";
 					else if(event.getCode() == keyboardHashMap.getKey("Right"))
-						notifyString+="Right";	
+						direction="Right";	
 					else if(event.getCode() == keyboardHashMap.getKey("Left"))
-						notifyString+="Left";
+						direction="Left";
 					else
+					{
+						prevKey = event.getCode();
 						return;
+					}
+					System.out.println(prevKey);
+					System.out.println(keyboardHashMap.getKey("Drag")+"\n");
+					notifyString += " "+direction + " "+specialAbility;
 					setChanged();
 					notifyObservers(notifyString);
+					
 				}
+			}
+		});
+		
+		fieldData.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode()==prevKey)
+					prevKey=null;
 			}
 		});
 		
@@ -310,6 +333,7 @@ public class MainWindowController extends Observable implements Initializable, V
 
 	@Override
 	public void stop() {
+		timer.stop();
 		setChanged();
 		notifyObservers("Exit -gui");
 	}
