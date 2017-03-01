@@ -16,15 +16,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import view.MainWindowController;
 
 public class KeyboardSettingsController implements Initializable {
 	@FXML
 	BorderPane borderPane;
-	
+	@FXML
+	TextField keyDragTextBox;
 	@FXML
 	TextField keyUpTextBox;
 	@FXML
@@ -33,7 +36,8 @@ public class KeyboardSettingsController implements Initializable {
 	TextField keyRightTextBox;
 	@FXML
 	TextField keyLeftTextBox;
-	
+	@FXML
+	Button keyDragBtn;
 	@FXML
 	Button keyUpBtn;
 	@FXML
@@ -43,9 +47,10 @@ public class KeyboardSettingsController implements Initializable {
 	@FXML
 	Button keyLeftBtn;
 	
+	MainWindowController parent;
+	
 	HashMap<Button,TextField> btnToText;
 	HashMap<Button,String> btnToKeyCode;
-	//KeyboardMap keymap;
 	KeyboardHashMap keymap;
 	
 	EventHandler<MouseEvent> clickEvent;
@@ -57,8 +62,14 @@ public class KeyboardSettingsController implements Initializable {
 		btnToText = new HashMap<Button,TextField>();
 		btnToKeyCode = new HashMap<Button,String>();
 		currButton=null;
-
 	}
+	/*public KeyboardSettingsController(MainWindowController parent) {
+		this.parent = parent;
+		btnToText = new HashMap<Button,TextField>();
+		btnToKeyCode = new HashMap<Button,String>();
+		currButton=null;
+
+	}*/
 	
 	public void updateTextFields()
 	{
@@ -68,10 +79,28 @@ public class KeyboardSettingsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		btnToText.put(keyDragBtn, keyDragTextBox);
 		btnToText.put(keyUpBtn,keyUpTextBox);
 		btnToText.put(keyDownBtn,keyDownTextBox);
 		btnToText.put(keyLeftBtn,keyLeftTextBox);
 		btnToText.put(keyRightBtn,keyRightTextBox);
+		/*
+		XMLEncoder xml;
+		try {
+			xml = new XMLEncoder(new FileOutputStream("./resources/keymap.xml"));
+			KeyboardHashMap keyboardmap = new KeyboardHashMap();
+			keyboardmap.setKey("Up", KeyCode.UP);
+			keyboardmap.setKey("Down", KeyCode.DOWN);
+			keyboardmap.setKey("Left", KeyCode.LEFT);
+			keyboardmap.setKey("Right", KeyCode.RIGHT);
+			keyboardmap.setKey("Drag", KeyCode.SHIFT);
+			xml.writeObject(keymap);
+			xml.flush();
+			xml.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 		try {
 			keymap = new KeyboardHashMapLoader().load("./resources/keymap.xml");
@@ -80,6 +109,7 @@ public class KeyboardSettingsController implements Initializable {
 			e1.printStackTrace();
 		}
 		
+		btnToKeyCode.put(keyDragBtn, "Drag");
 		btnToKeyCode.put(keyUpBtn,"Up");
 		btnToKeyCode.put(keyDownBtn,"Down");
 		btnToKeyCode.put(keyLeftBtn,"Left");
@@ -93,13 +123,13 @@ public class KeyboardSettingsController implements Initializable {
 		}
 		
 	*/
-		
+		//When I pressed on key what happened?
 		borderPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				if(currButton!=null)
 				{
-					keymap.setKey(btnToKeyCode.get(currButton),event.getCode());
+					keymap.setKey(btnToKeyCode.get(currButton),event.getCode());//link the action of the clicked button to the last pressed key!!! 
 					updateTextFields();
 					currButton=null;
 				}
@@ -121,6 +151,7 @@ public class KeyboardSettingsController implements Initializable {
 			}
 		};
 		
+		keyDragBtn.setOnMouseClicked(clickEvent);
 		keyUpBtn.setOnMouseClicked(clickEvent);
 		keyDownBtn.setOnMouseClicked(clickEvent);
 		keyRightBtn.setOnMouseClicked(clickEvent);
@@ -145,19 +176,16 @@ public class KeyboardSettingsController implements Initializable {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				FXMLLoader fxml = new FXMLLoader();
-				try {
-					BorderPane root = fxml.load(getClass().getResource("../MainWindow.fxml").openStream());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				MainWindowController mwc = fxml.getController();
-				mwc.loadKeyboardSettings();
+				parent.updateKeyboardSettings(true);
+				Stage stage = (Stage)borderPane.getScene().getWindow();
+				stage.close();
 			}
 		});
 		
+	}
+	
+	public void setParent(MainWindowController parent)
+	{
+		this.parent = parent;
 	}
 }

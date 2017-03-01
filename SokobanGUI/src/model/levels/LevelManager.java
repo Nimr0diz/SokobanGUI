@@ -2,6 +2,7 @@ package model.levels;
 
 import commons.Direction2D;
 import model.Position2D;
+import model.entities.RegularFigure;
 import model.entities.SolidEntity;
 
 
@@ -17,12 +18,37 @@ public class LevelManager {
 	{
 		SolidEntity base = se;
 		SolidEntity nextEntity = getNextSolidEntity(base,dir);
+		//System.out.println(level.getFirstFigure());
 		if(recMove(nextEntity,dir,base.getPolicy().getShifting().getStrength()-1))
 		{
-			se.move(dir);
-			return true;
+			level.removeSolidEntity(se.getPosition());
+			boolean isMove = se.move(dir);
+			level.addEntity(se);
+			return isMove;
 		}
 		return false;
+	}
+	
+	public boolean moveAndDrag(SolidEntity se, Direction2D dir)
+	{
+		Position2D oppositePos = new Position2D(se.getPosition());
+		oppositePos.move(dir.getOppositeDirection(), 1);
+		//Position2D nextPos = new Position2D(se.getPosition());
+		//oppositePos.move(dir, 1);
+		SolidEntity dragEntity = level.getSolidEntity(oppositePos);
+		//SolidEntity nextEntity = level.getSolidEntity(nextPos);
+		System.out.println(se);
+		if(recMove(se,dir,0))
+		{
+			level.removeSolidEntity(dragEntity.getPosition());
+			boolean isMove = dragEntity.move(dir);
+			level.addEntity(dragEntity);
+			return isMove;
+
+		}
+		return false;
+	
+		
 	}
 	
 	//This is a recursion method that check for each solid entity if the next one after able him to move or not

@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" prefHeight="213.0" prefWidth="359.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.settings.KeyboardSettingsController">
+<BorderPane fx:id="borderPane" prefHeight="248.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.settings.KeyboardSettingsController">
    <center>
-      <VBox prefHeight="190.0" prefWidth="336.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="181.0" prefWidth="349.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="75.0" text="Move Up">
+                  <Label prefHeight="17.0" prefWidth="85.0" text="Move Up">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -32,7 +32,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="75.0" text="Move Down">
+                  <Label prefHeight="17.0" prefWidth="85.0" text="Move Down">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -50,7 +50,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="75.0" text="Move Left">
+                  <Label prefWidth="85.0" text="Move Left">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -68,7 +68,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="349.0">
                <children>
-                  <Label prefWidth="75.0" text="Move Right">
+                  <Label prefWidth="85.0" text="Move Right">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -79,6 +79,24 @@
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="keyRightBtn" mnemonicParsing="false" text="Set Key" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="85.0" text="Drag Ability">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="keyDragTextBox" prefHeight="25.0">
+                     <HBox.margin>
+                        <Insets right="35.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="keyDragBtn" mnemonicParsing="false" text="Set Key" />
                </children>
             </HBox>
          </children>

@@ -108,4 +108,16 @@ public class MyModel extends Observable implements Model {
 		notifyObservers("FinishLevel");
 	}
 
+	@Override
+	public boolean moveAndDrag(Direction2D dir) {
+		LevelManager lm=new LevelManager(level);
+		boolean isDrag=lm.moveAndDrag(level.getFirstFigure(), dir);
+		if(level.getBoxesLeft()==0)
+		{
+			finishLevel();
+		   return false;
+		}
+		return isDrag;
+	}
+
 }
