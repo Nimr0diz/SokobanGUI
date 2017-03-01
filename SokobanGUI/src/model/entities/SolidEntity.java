@@ -2,23 +2,23 @@ package model.entities;
 
 import commons.Direction2D;
 import model.Position2D;
-import model.policies.Policy;
+import model.entities.policies.EntityPolicy;
 
 //This is the abstract super class of all the solid entities in the game.
 //The SolidiEntity has Position (from AbstractEntity) and Policy.
 public abstract class SolidEntity extends AbstractEntity{
-	Policy policy;
+	EntityPolicy policy;
 	
 	public SolidEntity() {
 		super();
 	}
 	
-	public SolidEntity(Policy policy)
+	public SolidEntity(EntityPolicy policy)
 	{
 		this.policy = policy;
 	}
 	
-	public SolidEntity(Position2D pos,Policy policy) {
+	public SolidEntity(Position2D pos,EntityPolicy policy) {
 		super(pos);
 		this.policy = policy;
 	}
@@ -29,11 +29,11 @@ public abstract class SolidEntity extends AbstractEntity{
 		return policy.getMovement().move(position, dir);
 	}
 
-	public Policy getPolicy() {
+	public EntityPolicy getPolicy() {
 		return policy;
 	}
 
-	public void setPolicy(Policy policy) {
+	public void setPolicy(EntityPolicy policy) {
 		this.policy = policy;
 	}
 	

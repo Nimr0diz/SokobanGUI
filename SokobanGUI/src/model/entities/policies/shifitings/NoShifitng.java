@@ -1,4 +1,4 @@
-package model.policies.shifitings;
+package model.entities.policies.shifitings;
 
 //This class represent no shifting.
 public class NoShifitng implements Shifting {

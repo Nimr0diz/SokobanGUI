@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Policy;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -20,6 +21,7 @@ import model.levels.savers.LevelSaver;
 import model.levels.savers.MyObjectLevelSaver;
 import model.levels.savers.MyTextLevelSaver;
 import model.levels.savers.MyXMLLevelSaver;
+import model.policies.MySokobanPolicy;
 
 public class MyModel extends Observable implements Model {
 
@@ -58,7 +60,7 @@ public class MyModel extends Observable implements Model {
 	
 	@Override
 	public boolean move(Direction2D dir) {
-		LevelManager lm=new LevelManager(level);
+		LevelManager lm=new LevelManager(level,new MySokobanPolicy());
 		boolean isMove =  lm.move(level.getFirstFigure(), dir);
 		if(level.getBoxesLeft()==0)
 		{
@@ -108,9 +110,10 @@ public class MyModel extends Observable implements Model {
 		notifyObservers("FinishLevel");
 	}
 
+	/*
 	@Override
 	public boolean moveAndDrag(Direction2D dir) {
-		LevelManager lm=new LevelManager(level);
+		LevelManager lm=new LevelManager(level,new MySokobanPolicy());
 		boolean isDrag=lm.moveAndDrag(level.getFirstFigure(), dir);
 		if(level.getBoxesLeft()==0)
 		{
@@ -119,5 +122,6 @@ public class MyModel extends Observable implements Model {
 		}
 		return isDrag;
 	}
+	*/
 
 }

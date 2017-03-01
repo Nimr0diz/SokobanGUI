@@ -1,4 +1,4 @@
-package model.policies.shifitings;
+package model.entities.policies.shifitings;
 
 //This class represent regular shifting (only one entity).
 public class RegularShifting implements Shifting {
