@@ -7,7 +7,7 @@ import model.Position2D;
 public abstract class BoxTarget extends UnsolidEntity {
 
 	public BoxTarget() {
-		super();
+		super(new UnsolidPolicy());
 	}
 	
 	public BoxTarget(Position2D pos) {

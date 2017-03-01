@@ -14,10 +14,18 @@ public class CharToEntity {
 		solidhm.put('#', new RegularWallCreator());
 		solidhm.put('@', new RegularBoxCreator());
 		solidhm.put('A', new RegularFigureCreator());
+		solidhm.put('L', new RegularBoxCreator());//Box + Left Door
+		solidhm.put('R', new RegularBoxCreator());//Box + Right Door
+		solidhm.put('l', new RegularFigureCreator());//Figure + Left Door
+		solidhm.put('r', new RegularFigureCreator());//Figure + Right Door
 		
 		//Initializing HashMap.
 		unsolidhm = new HashMap<Character,UnsolidCreator>();
 		unsolidhm.put('O', new RegularBoxTargetCreator());
+		unsolidhm.put('L', new RegularLeftDoorCreator());
+		unsolidhm.put('l', new RegularLeftDoorCreator());
+		unsolidhm.put('R', new RegularRightDoorCreator());
+		unsolidhm.put('r', new RegularRightDoorCreator());
 		
 	}
 	
